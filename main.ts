@@ -92,8 +92,14 @@ assets.image`Romulan`
 cx = 80
 ex = 80
 let cy = 40
-Enterprise = sprites.create(assets.image`myImage1`, SpriteKind.ship)
+Enterprise = sprites.create(assets.image`ship`, SpriteKind.ship)
 ey = 99
+animation.runImageAnimation(
+Enterprise,
+assets.animation`shipanim`,
+400,
+true
+)
 Enterprise.setPosition(ex, ey)
 warp = 100
 let stars = [
@@ -211,7 +217,7 @@ forever(function () {
         300,
         true
         )
-        drum.setPosition(cx, cy)
+        drum.setPosition(cx + randint(-20, 20), cy)
         drum.setVelocity(0, 50)
         drum.setFlag(SpriteFlag.AutoDestroy, true)
     }
