@@ -1,6 +1,7 @@
 namespace SpriteKind {
     export const star = SpriteKind.create()
     export const ship = SpriteKind.create()
+    export const trktr = SpriteKind.create()
 }
 controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     warp += -5
@@ -8,8 +9,15 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
         warp = 0
     }
 })
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Food, function (sprite, otherSprite) {
+    otherSprite.destroy(effects.fire, 500)
+    sprite.destroy(effects.fire, 500)
+    scene.cameraShake(4, 500)
+    music.knock.play()
+    info.changeScoreBy(-10)
+})
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    tractor = sprites.create(assets.image`capture`, SpriteKind.Projectile)
+    tractor = sprites.create(assets.image`capture`, SpriteKind.trktr)
     tractor.setPosition(ex, ey)
     tractor.setFlag(SpriteFlag.AutoDestroy, true)
     tractor.setVelocity(0, -200)
@@ -43,6 +51,13 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     Enterprise.setPosition(ex, ey)
     cx = ex
 })
+sprites.onOverlap(SpriteKind.trktr, SpriteKind.Food, function (sprite, otherSprite) {
+    otherSprite.destroy(effects.halo, 500)
+    sprite.destroy(effects.halo, 500)
+    scene.cameraShake(4, 500)
+    music.knock.play()
+    info.changeScoreBy(10)
+})
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     warp += 5
     if (200 < warp) {
@@ -66,6 +81,7 @@ let ey = 0
 let Enterprise: Sprite = null
 let ex = 0
 let cx = 0
+game.splash("Avoid (or destroy) enemies.", "Capture resource canisters!")
 info.setLife(10)
 let Enemies = [
 assets.image`Klingon`,
