@@ -21,7 +21,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     tractor.setPosition(ex, ey)
     tractor.setFlag(SpriteFlag.AutoDestroy, true)
     tractor.setVelocity(0, -200)
-    pause(2000)
+    pause(1000)
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     blast = sprites.create(assets.image`phaser`, SpriteKind.Projectile)
@@ -209,7 +209,7 @@ forever(function () {
         villain.setVelocity(0, 50)
         villain.setFlag(SpriteFlag.AutoDestroy, true)
     }
-    if (90 < randint(0, 100)) {
+    if (93 < randint(0, 100)) {
         drum = sprites.create(assets.image`resource`, SpriteKind.Food)
         animation.runImageAnimation(
         drum,
@@ -217,7 +217,7 @@ forever(function () {
         300,
         true
         )
-        drum.setPosition(cx + randint(-20, 20), cy)
+        drum.setPosition(cx + randint(-40, 40), cy)
         drum.setVelocity(0, 50)
         drum.setFlag(SpriteFlag.AutoDestroy, true)
     }
